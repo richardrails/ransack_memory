@@ -1,0 +1,4 @@
+RansackMemory.config = {
+  param: :q,
+
+}
