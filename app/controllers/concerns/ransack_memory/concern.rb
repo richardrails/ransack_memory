@@ -1,5 +1,5 @@
-module Concerns
-  module RansackMemory
+module RansackMemory
+  module Concern
     extend ActiveSupport::Concern
 
     def save_and_load_filters
@@ -13,7 +13,7 @@ module Concerns
 
       if user_signed_in?
         # search term saving
-        session["#{controller_name}_#{action_name}_#{request.xhr?}"] = params[RansackMemory.config[:param]] if params[RansackMemory.config[:param]].present?
+        session["#{controller_name}_#{action_name}_#{request.xhr?}"] = params[::RansackMemory::Core.config[:param]] if params[::RansackMemory::Core.config[:param]].present?
 
         # page number saving
         session["#{controller_name}_#{action_name}_#{request.xhr?}_page"] = params[:page] if params[:page].present?
@@ -25,9 +25,9 @@ module Concerns
       if user_signed_in?
         # search term load
         if session["#{controller_name}_#{action_name}_#{request.xhr?}"]
-          params[RansackMemory.config[:param]] = session["#{controller_name}_#{action_name}_#{request.xhr?}"]
+          params[::RansackMemory::Core.config[:param]] = session["#{controller_name}_#{action_name}_#{request.xhr?}"]
         else
-          params[RansackMemory.config[:param]] = nil
+          params[::RansackMemory::Core.config[:param]] = nil
         end
 
         # page number load
@@ -38,11 +38,11 @@ module Concerns
         end
 
         # set page number to 1 if filter has changed
-        if (params[RansackMemory.config[:param]] && session[:last_q_params] != params[RansackMemory.config[:param]]) || (params[:cancel_filter].present? && session["#{controller_name}_#{action_name}_#{request.xhr?}_page"] != params[:page])
+        if (params[::RansackMemory::Core.config[:param]] && session[:last_q_params] != params[::RansackMemory::Core.config[:param]]) || (params[:cancel_filter].present? && session["#{controller_name}_#{action_name}_#{request.xhr?}_page"] != params[:page])
           params[:page] = nil
           session["#{controller_name}_#{action_name}_#{request.xhr?}_page"] = nil
         end
-        session[:last_q_params] = params[RansackMemory.config[:param]]
+        session[:last_q_params] = params[::RansackMemory::Core.config[:param]]
 
         # per page load
         if session["#{controller_name}_#{action_name}_#{request.xhr?}_per_page"]

@@ -1,6 +1,11 @@
+$:.push File.expand_path("../lib", __FILE__)
+
+# Maintain your gem's version:
+require "ransack_memory/version"
+
 Gem::Specification.new do |s|
   s.name               = "ransack_memory"
-  s.version            = "0.0.1"
+  s.version            = RansackMemory::VERSION
   s.default_executable = "ransack_memory"
   s.platform    = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.9.3'

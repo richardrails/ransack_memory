@@ -13,11 +13,21 @@ Add this line to your basic controller (typically ApplicationController):
 
 ```ruby
 class ApplicationController < ActionController::Base
-  include Concerns::RansackMemory # insert this line
+  include RansackMemory::Concern # insert this line
 
   before_action :authenticate_user! # only if you use Devise gem
-  before_action :save_and_load_filters # insert this line after Devise auth
+  before_action :save_and_load_filters # insert this line after Devise auth before filter (Devise gem is not necessary)
 end
+```
+
+Add this in your views where you have search forms. This is clear button, which deletes ransack memory sessions.
+```erb
+<%= clear_filter %>
+```
+You can pass any of link attributes:
+
+```erb
+<%= clear_filter, class: 'btn btn-primary', data: {confirm: 'Really?', my_data: 'something'} %>
 ```
 
 ## Configuration
@@ -25,8 +35,9 @@ end
 Create file in config/initializers/ransack_memory.rb with this content:
 
 ```ruby
-RansackMemory.config = {
-  param: :q # this means the default Ransack param name for searching. You can change it
+RansackMemory::Core.config = {
+  param: :q, # this means the default Ransack param name for searching. You can change it
+  link_label: 'Clear filter' # clear_filter link label
 }
 ```
 

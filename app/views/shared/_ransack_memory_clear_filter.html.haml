@@ -1,2 +1,2 @@
-- if params[RansackMemory.config[:param]].present?
-  = link_to 'Clear filter', url_for + "?cancel_filter=true", opts
+- if params[RansackMemory::Core.config[:param].presence || :q].present?
+  = link_to RansackMemory::Core.config[:link_label].presence || 'Clear filter', url_for + "?cancel_filter=true", opts

@@ -1,9 +1,15 @@
-class RansackMemory
-  @@config = {}
-  cattr_accessor :config
+module RansackMemory
 
-  def initialize(opts = {})
-    @opts = opts
+  require 'ransack_memory/version'
+  require 'ransack_memory/engine' if defined?(::Rails)
+
+  class Core
+    @@config = {}
+    cattr_accessor :config
+
+    def initialize(opts = {})
+      @opts = opts
+    end
   end
 
 end
