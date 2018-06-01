@@ -1,0 +1,3 @@
+<% if params[RansackMemory::Core.config[:param].presence || :q].present? %>
+    <%= link_to RansackMemory::Core.config[:link_label].presence || 'Clear filter', url_for + "?cancel_filter=true", opts %>
+<% end %>
