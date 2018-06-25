@@ -27,7 +27,7 @@ Add this in your views where you have search forms. This is clear button, which 
 You can pass any of link attributes:
 
 ```erb
-<%= clear_filter, class: 'btn btn-primary', data: {confirm: 'Really?', my_data: 'something'} %>
+<%= clear_filter, title: 'Clear Filter', class: 'btn btn-primary', data: {confirm: 'Really?', my_data: 'something'} %>
 ```
 
 ## Configuration
@@ -36,8 +36,7 @@ Create file in config/initializers/ransack_memory.rb with this content:
 
 ```ruby
 RansackMemory::Core.config = {
-  param: :q, # this means the default Ransack param name for searching. You can change it
-  link_label: 'Clear filter' # clear_filter link label
+  param: :q # this means the default Ransack param name for searching. You can change it
 }
 ```
 

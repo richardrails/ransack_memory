@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Richard Lapiš"]
-  s.date = %q{2018-03-06}
+  s.date = %q{2018-06-25}
   s.description = %q{Automatically save and load ransack's filtered params into session}
   s.email = %q{richard.lapis@gmail.com}
   s.files = `git ls-files`.split("\n")
