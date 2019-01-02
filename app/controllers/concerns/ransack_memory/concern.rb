@@ -6,6 +6,9 @@ module RansackMemory
       
       session_key_base = "#{controller_name}_#{action_name}_#{request.xhr?}"
 
+      # permit search params
+      params[::RansackMemory::Core.config[:param]].permit! if params[::RansackMemory::Core.config[:param]].present? && params[::RansackMemory::Core.config[:param]].respond_to?(:permit)
+
       # cancel filter if button pressed
       if params[:cancel_filter] == "true"
         session["#{session_key_base}"] = nil
@@ -38,6 +41,7 @@ module RansackMemory
       end
 
       session[:last_q_params] = params[::RansackMemory::Core.config[:param]]
+
       # session[:last_page] = params[:page]
     end
   end
