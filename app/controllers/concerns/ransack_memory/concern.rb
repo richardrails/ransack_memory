@@ -4,7 +4,7 @@ module RansackMemory
 
     def save_and_load_filters
       
-      session_key_base = "#{controller_name}_#{action_name}_#{request.xhr?}"
+      session_key_base = "ranmemory_#{controller_name}_#{action_name}_#{request.format.symbol.to_s}"
 
       # cancel filter if button pressed
       if params[:cancel_filter] == "true"
@@ -39,6 +39,13 @@ module RansackMemory
 
       session[:last_q_params] = params[::RansackMemory::Core.config[:param]]
       # session[:last_page] = params[:page]
+    end
+
+    # controller method, useful when you want to clear sessions when sign into another user
+    def clear_sessions
+      session.keys.each do |key|
+        session.delete(key) if key =~ /ranmemory_/
+      end
     end
   end
 end
