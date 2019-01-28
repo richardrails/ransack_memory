@@ -3,7 +3,7 @@ module RansackMemory
     extend ActiveSupport::Concern
 
     def save_and_load_filters
-      
+
       session_key_base = "ranmemory_#{controller_name}_#{action_name}_#{request.format.symbol.to_s}"
 
       # permit search params
@@ -20,7 +20,8 @@ module RansackMemory
       session["#{session_key_base}"] = params[::RansackMemory::Core.config[:param]] if params[::RansackMemory::Core.config[:param]].present?
 
       # page number saving
-      session["#{session_key_base}_page"] = params[:page] if params[:page].present?
+      target_page = params[:page].presence || 1
+      session["#{session_key_base}_page"] = target_page
 
       # per page saving
       session["#{session_key_base}_per_page"] = params[:per_page] if params[:per_page].present?
