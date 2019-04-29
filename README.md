@@ -42,3 +42,9 @@ RansackMemory::Core.config = {
 
 Or you can generate this config file by running ```rails generate ransack_memory``` in console. 
 
+## Kaminari issue
+
+When you have an issue with Kaminari gem, that you can't go back to the first page, update your kaminari view in `app/views/kaminari/_first_page.html.erb`:
+```erb
+<%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url_for(params.merge({page: 1, cancel_filter: nil})), remote: remote, class: 'btn btn-secondary' %>
+```
