@@ -3,8 +3,12 @@ module RansackMemory
     extend ActiveSupport::Concern
 
     def save_and_load_filters
-      
-      session_key_base = "ranmemory_#{controller_name}_#{action_name}_#{request.format.symbol.to_s}"
+      session_key_identifier = ::RansackMemory::Core.config[:session_key_format]
+        .gsub('%controller_name%', controller_name)
+        .gsub('%action_name%', action_name)
+        .gsub('%request_format%', request.format.symbol.to_s)
+
+      session_key_base = "ranmemory_#{session_key_identifier}"
 
       # permit search params
       params[::RansackMemory::Core.config[:param]].permit! if params[::RansackMemory::Core.config[:param]].present? && params[::RansackMemory::Core.config[:param]].respond_to?(:permit)
