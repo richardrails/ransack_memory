@@ -43,6 +43,18 @@ RansackMemory::Core.config = {
 
 Or you can generate this config file by running ```rails generate ransack_memory``` in console. 
 
+## Load saved filters from another controller action
+
+In some cases, you want to load saved filters from another controller action. If so, you just create in the same controller this method:
+
+```ruby
+  def set_session_key_identifier
+    'projects_index_html' if action_name == 'my_another_action'
+  end
+```
+this means that Ransack Memory load all filters that have been saved in action projects/index.html and load them into projects/my_another_action. This method must be public, not in private section!
+Standard session key building is: ```"#{controller_name}_#{action_name}_#{request.format}"``` so you can load saved filters in any controller action like that.
+
 ## Kaminari issue
 
 When you have an issue with Kaminari gem, that you can't go back to the first page, update your kaminari view in `app/views/kaminari/_first_page.html.erb`:
