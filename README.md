@@ -57,7 +57,11 @@ Standard session key building is: ```"#{controller_name}_#{action_name}_#{reques
 
 ## Kaminari issue
 
-When you have an issue with Kaminari gem, that you can't go back to the first page, update your kaminari view in `app/views/kaminari/_first_page.html.erb`:
+When you have an issue with Kaminari gem, that you can't go back to the first page, generate a kaminari configuration in the initializers folder 
+and set ```config.params_on_first_page = true```. 
+
+As an alternative update your kaminari view in `app/views/kaminari/_first_page.html.erb`:
 ```erb
 <%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url_for(params.merge({page: 1, cancel_filter: nil})), remote: remote, class: 'btn btn-secondary' %>
 ```
+However beware that this will probably lead to problems in later Rails versions due to a change in the way it allows you to merge parameters.
