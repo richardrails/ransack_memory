@@ -33,7 +33,7 @@ module RansackMemory
       session["#{session_key_base}_per_page"] = params[:per_page] if params[:per_page].present?
 
       # search term load
-      params[::RansackMemory::Core.config[:param]] = session["#{session_key_base}"].presence
+      params[::RansackMemory::Core.config[:param]] = session["#{session_key_base}"] if session["#{session_key_base}"].present?
 
       # page number load
       params[:page] = session["#{session_key_base}_page"].presence
