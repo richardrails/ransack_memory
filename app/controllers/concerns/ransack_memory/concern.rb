@@ -24,7 +24,7 @@ module RansackMemory
       end
 
       # search term saving
-      session["#{session_key_base}"] = params[::RansackMemory::Core.config[:param]] if params[::RansackMemory::Core.config[:param]].present?
+      session["#{session_key_base}"] = params[::RansackMemory::Core.config[:param]].to_h if params[::RansackMemory::Core.config[:param]].present?
 
       # page number saving
       session["#{session_key_base}_page"] = params[:page] if params[:page].present?
@@ -47,7 +47,7 @@ module RansackMemory
         session["#{session_key_base}_page"] = nil
       end
 
-      session[:last_q_params] = params[::RansackMemory::Core.config[:param]]
+      session[:last_q_params] = params[::RansackMemory::Core.config[:param]]&.to_unsafe_h
 
       # session[:last_page] = params[:page]
     end
