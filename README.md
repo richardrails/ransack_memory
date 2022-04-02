@@ -27,7 +27,7 @@ Add this in your views where you have search forms. This is clear button, which 
 You can pass any of link attributes:
 
 ```erb
-<%= clear_filter, title: 'Clear Filter', class: 'btn btn-primary', data: {confirm: 'Really?', my_data: 'something'} %>
+<%= clear_filter title: 'Clear Filter', class: 'btn btn-primary', data: {confirm: 'Really?', my_data: 'something'} %>
 ```
 
 ## Configuration
