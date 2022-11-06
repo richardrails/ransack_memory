@@ -9,6 +9,12 @@ Add this line to your application's Gemfile:
 gem 'ransack_memory'
 ```
 
+Run the generator
+
+```shell
+rails generate ransack_memory
+```
+
 Add this line to your basic controller (typically ApplicationController):
 
 ```ruby
@@ -32,7 +38,7 @@ You can pass any of link attributes:
 
 ## Configuration
 
-Create file in config/initializers/ransack_memory.rb with this content:
+Running ```rails generate ransack_memory``` the console will generate `config/initializers/ransack_memory.rb` with this content:
 
 ```ruby
 RansackMemory::Core.config = {
@@ -40,8 +46,6 @@ RansackMemory::Core.config = {
   session_key_format: '%controller_name%_%action_name%_%request_format%' # this means how the key used to store the information to the session will be stored. Currently it interpolates request parameters. You can customize it and use these vars to build a key that fits your needs
 }
 ```
-
-Or you can generate this config file by running ```rails generate ransack_memory``` in console. 
 
 ## Load saved filters from another controller action
 
