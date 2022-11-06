@@ -38,7 +38,7 @@ You can pass any of link attributes:
 
 ## Configuration
 
-Running ```rails generate ransack_memory``` the the console will generate `config/initializers/ransack_memory.rb` with this content:
+Running ```rails generate ransack_memory``` the console will generate `config/initializers/ransack_memory.rb` with this content:
 
 ```ruby
 RansackMemory::Core.config = {
