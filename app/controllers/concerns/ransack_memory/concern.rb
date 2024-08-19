@@ -6,7 +6,7 @@ module RansackMemory
       user_set_key_identifier = respond_to?(:set_session_key_identifier) ? send(:set_session_key_identifier) : nil
 
       session_key_identifier = ::RansackMemory::Core.config[:session_key_format]
-                                   .gsub('%controller_name%', controller_name)
+                                   .gsub('%controller_name%', controller_path.parameterize.underscore)
                                    .gsub('%action_name%', action_name)
                                    .gsub('%request_format%', request.format.symbol.to_s)
 
