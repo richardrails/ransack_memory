@@ -9,6 +9,7 @@ module RansackMemory
                                    .gsub('%controller_name%', controller_path.parameterize.underscore)
                                    .gsub('%action_name%', action_name)
                                    .gsub('%request_format%', request.format.symbol.to_s)
+                                   .gsub('%turbo_frame%', request.headers['Turbo-Frame'] || 'top')
 
       session_key_base = user_set_key_identifier.presence || "ranmemory_#{session_key_identifier}"
       session_key_base = "ranmemory_#{session_key_base}" unless session_key_base.starts_with?('ranmemory')
