@@ -47,6 +47,18 @@ RansackMemory::Core.config = {
 }
 ```
 
+Available variables for `session_key_format`: `%controller_name%`, `%action_name%`, `%request_format%`, `%turbo_frame%` and `%path_params%`.
+
+### Nested resources
+
+By default `/projects/1/tasks` and `/projects/2/tasks` share one saved filter and page number, because they are the same controller action. Add `%path_params%` to keep them separate (it interpolates dynamic route segments, e.g. `project_id-1`):
+
+```ruby
+session_key_format: '%controller_name%_%action_name%_%request_format%_%path_params%'
+```
+
+Beware that every parent record then gets its own entry in the session. With the default cookie session store (4 kB limit) prefer a server side session store.
+
 ## Load saved filters from another controller action
 
 In some cases, you want to load saved filters from another controller action. If so, you just create in the same controller this method:
@@ -56,7 +68,7 @@ In some cases, you want to load saved filters from another controller action. If
     'projects_index_html' if action_name == 'my_another_action'
   end
 ```
-this means that Ransack Memory load all filters that have been saved in action projects/index.html and load them into projects/my_another_action. This method must be public, not in private section!
+this means that Ransack Memory load all filters that have been saved in action projects/index.html and load them into projects/my_another_action. The method can be public or private.
 Standard session key building is: ```"#{controller_name}_#{action_name}_#{request.format}"``` so you can load saved filters in any controller action like that.
 
 ## Kaminari issue
@@ -69,3 +81,10 @@ As an alternative update your kaminari view in `app/views/kaminari/_first_page.h
 <%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url_for(params.merge({page: 1, cancel_filter: nil})), remote: remote, class: 'btn btn-secondary' %>
 ```
 However beware that this will probably lead to problems in later Rails versions due to a change in the way it allows you to merge parameters.
+
+## Development
+
+```shell
+bundle install
+bundle exec rake test
+```

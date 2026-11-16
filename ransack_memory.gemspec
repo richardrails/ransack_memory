@@ -4,30 +4,23 @@ $:.push File.expand_path("../lib", __FILE__)
 require "ransack_memory/version"
 
 Gem::Specification.new do |s|
-  s.name               = "ransack_memory"
-  s.version            = RansackMemory::VERSION
+  s.name        = "ransack_memory"
+  s.version     = RansackMemory::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 1.9.3'
+  s.authors     = ["Richard Lapiš"]
+  s.email       = "richard.lapis@gmail.com"
+  s.homepage    = "https://github.com/richardrails/ransack_memory"
+  s.summary     = "Automatically save and load ransack's filtered params into session"
+  s.description = "Remembers Ransack search params, page number and per page value in the Rails session for each controller action and loads them back on the next visit."
+  s.license     = "MIT"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Richard Lapiš"]
-  s.date = %q{2018-06-25}
-  s.description = %q{Automatically save and load ransack's filtered params into session}
-  s.email = %q{richard.lapis@gmail.com}
-  s.files = `git ls-files`.split("\n")
-  s.test_files = []
-  s.homepage = %q{https://github.com/richardrails/ransack_memory}
-  s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Automatically save and load ransack's filtered params into session}
-  s.license = 'MIT'
+  s.required_ruby_version = ">= 2.5"
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
+  s.metadata = {
+    "source_code_uri" => s.homepage,
+    "bug_tracker_uri" => "#{s.homepage}/issues"
+  }
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-    else
-    end
-  else
-  end
+  s.files = Dir["{app,lib}/**/*", "MIT-LICENCE", "LICENCE", "README.md"]
+  s.require_paths = ["lib"]
 end
